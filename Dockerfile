@@ -5,7 +5,7 @@ MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 RUN apk add --no-cache \
     bash \
     su-exec
-
+RUN ls
 ENV ZOO_USER=zookeeper \
     ZOO_CONF_DIR=/conf \
     ZOO_DATA_DIR=/data \
