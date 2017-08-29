@@ -27,5 +27,3 @@ else
   zkServer.sh stop
   zkServer.sh start-foreground
 fi
-
-/docker-entrypoint.sh/docker-entrypoint.sh
