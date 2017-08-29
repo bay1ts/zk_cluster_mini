@@ -8,10 +8,10 @@ HOSTN="$IFS" IFS="-" arr=($HOSTNAME) IFS="$OLD_IFS" echo  ${arr[@]:0:1}
 
  
 ((MYID=$Index+1)) 
-ZK="$HOSTN"+00
+ZK="$HOSTN"+0
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
-if [ "$Index"=="00" ]
+if [ "$Index"=="0" ]
 then
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> "$ZOO_CONF_DIR"/zoo.cfg.dynamic
   zkServer-initialize.sh --force --myid=$MYID
