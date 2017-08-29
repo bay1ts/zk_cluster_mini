@@ -31,12 +31,9 @@ RUN set -x \
         gnupg \
     && wget -q "$ZK_URL/$DISTRO_NAME.tar.gz" \
     && wget -q "$ZK_URL/$DISTRO_NAME.tar.gz.asc" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
-    && gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz" \
     && tar -xzf "$DISTRO_NAME.tar.gz" \
     && mv "$DISTRO_NAME/conf/"* "$ZOO_CONF_DIR" \
-    && rm -r "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc" \
+    && rm -r "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc" \
     && apk del .build-deps
 
 WORKDIR $DISTRO_NAME
