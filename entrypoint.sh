@@ -1,10 +1,14 @@
-#!/bin/sh
+#!/bin/bash
  
 HOSTNAME=`hostname`
 
 cd "$ZOO_CONF_DIR"
-Index="$IFS" IFS="-" arr=($HOSTNAME) IFS="$OLD_IFS" echo  ${arr[@]:1:1}
-HOSTN="$IFS" IFS="-" arr=($HOSTNAME) IFS="$OLD_IFS" echo  ${arr[@]:0:1}
+OLD_IFS="$IFS" 
+IFS="-" 
+arr=($HOSTNAME) 
+IFS="$OLD_IFS"
+HOSTN=${arr[@]:0:1}
+Index=${arr[@]:1:1}
 
  
 ((MYID=$Index+1)) 
