@@ -1,8 +1,13 @@
-FROM ubuntu:vivid
-RUN ls
-RUN apt-get update \
- && apt-get -y install git ant openjdk-8-jdk \
- && apt-get clean
+FROM goodrainapps/openjdk:8u131-jre-alpine
+MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
+
+# Install required packages
+RUN apk add --no-cache \
+    bash \
+    git \
+    ant \
+    su-exec
+
 RUN mkdir /tmp/zookeeper
 WORKDIR /tmp/zookeeper
 RUN git clone https://github.com/apache/zookeeper.git .
