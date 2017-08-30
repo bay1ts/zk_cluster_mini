@@ -1,6 +1,6 @@
 FROM ubuntu:vivid
 RUN ls
-RUN RUN apt-get update \
+RUN apt-get update \
  && apt-get -y install git ant openjdk-8-jdk \
  && apt-get clean
 RUN mkdir /tmp/zookeeper
