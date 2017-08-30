@@ -37,7 +37,8 @@ WORKDIR /tmp/zookeeper
 RUN git clone https://github.com/apache/zookeeper.git .
 RUN git checkout release-3.5.1-rc2
 RUN ant jar
-ENV ZOO_CONF_DIR=/tmp/zookeeper/conf \
+ENV ZOO_USER=zookeeper \
+    ZOO_CONF_DIR=/tmp/zookeeper/conf \
     ZOO_DATA_DIR=/data \
     ZOO_DATA_LOG_DIR=/datalog \
     ZOO_PORT=2181 \
