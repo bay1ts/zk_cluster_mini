@@ -5,16 +5,28 @@ MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 RUN apk update && apk upgrade && \
 apk add --no-cache git 
 
+
+#####
 # Ant
-ENV ANT_FILENAME=apache-ant-1.9.9 \
-    ANT_HOME=/opt/ant \
-    PATH=${PATH}:/opt/ant/bin
+#####
 
-ADD https://www.apache.org/dist/ant/binaries/apache-ant-1.9.9-bin.tar.bz2 /tmp/ant.tar.bz2
+# Preparation
 
-RUN tar -C /opt -xjf /tmp/ant.tar.bz2 && \
-    ln -s /opt/apache-ant-1.9.9 /opt/ant && \
-rm -rf /tmp/* /var/cache/apk/* /opt/ant/manual/*
+ENV ANT_VERSION 1.9.9
+ENV ANT_HOME /etc/ant-${ANT_VERSION}
+
+# Installation
+
+RUN cd /tmp \
+    && wget http://www.us.apache.org/dist/ant/binaries/apache-ant-${ANT_VERSION}-bin.tar.gz \
+    && mkdir ant-${ANT_VERSION} \
+    && tar -zxvf apache-ant-${ANT_VERSION}-bin.tar.gz \
+    && mv apache-ant-${ANT_VERSION} ${ANT_HOME} \
+    && rm apache-ant-${ANT_VERSION}-bin.tar.gz \
+    && rm -rf ant-${ANT_VERSION} \
+    && rm -rf ${ANT_HOME}/manual \
+    && unset ANT_VERSION
+ENV PATH ${PATH}:${ANT_HOME}/bin
 
 RUN apk add --no-cache \
     bash \
