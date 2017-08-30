@@ -3,17 +3,20 @@
 HOSTNAME=`hostname`
 
 cd /tmp/zookeeper
+ls
+echo "-----"
 OLD_IFS="$IFS" 
 IFS="-" 
 arr=($HOSTNAME) 
 IFS="$OLD_IFS"
 HOSTN=${arr[@]:0:1}
 Index=${arr[@]:1:1}
-
+echo "$index"
  
 ((MYID=$Index+1)) 
 ZK=${HOSTN}"-0"
-echo "first zk is $ZK"
+echo "first zk is ------"
+echo "$ZK"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index"=="0" ]
