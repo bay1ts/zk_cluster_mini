@@ -1,5 +1,5 @@
 FROM goodrainapps/openjdk:8u131-jdk-alpine
-MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
+MAINTAINER Bay1ts <bay1ts@163.com>
 
 # Install required packages
 RUN apk update && apk upgrade && \
@@ -44,5 +44,6 @@ RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
 RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
 COPY entrypoint.sh /tmp/
+RUN echo "coping entry"
 RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
