@@ -18,6 +18,8 @@ echo "first zk is $ZK"
 
 if [ "$Index"=="0" ]
 then
+  echo "--------------------"
+  ls /tmp/zookeeper/bin
   echo "server.$MYID=$IPADDRESS:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
