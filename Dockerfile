@@ -10,10 +10,10 @@ ENV ANT_FILENAME=apache-ant-1.9.7 \
     ANT_HOME=/opt/ant \
     PATH=${PATH}:/opt/ant/bin
 
-ADD https://www.apache.org/dist/ant/binaries/${ANT_FILENAME}-bin.tar.bz2 /tmp/ant.tar.bz2
+ADD https://www.apache.org/dist/ant/binaries/apache-ant-1.9.7-bin.tar.bz2 /tmp/ant.tar.bz2
 
 RUN tar -C /opt -xjf /tmp/ant.tar.bz2 && \
-    ln -s /opt/${ANT_FILENAME} /opt/ant && \
+    ln -s /opt/apache-ant-1.9.7 /opt/ant && \
 rm -rf /tmp/* /var/cache/apk/* /opt/ant/manual/*
 
 RUN apk add --no-cache \
