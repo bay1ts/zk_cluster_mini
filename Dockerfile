@@ -3,7 +3,8 @@ MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 
 # Install required packages
 RUN apk update && apk upgrade && \
-apk add --no-cache git ant
+apk add --no-cache git 
+RUN apk add --no-cache ant
 
 RUN apk add --no-cache \
     bash \
