@@ -42,6 +42,6 @@ EXPOSE 2181 2888 3888
 RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
 RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
-ADD entrypoint.sh /tmp／
+COPY entrypoint.sh /tmp／
 RUN chmod 777 /tmp/entrypoint.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
