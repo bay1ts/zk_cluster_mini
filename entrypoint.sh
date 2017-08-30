@@ -18,17 +18,19 @@ echo "first zk is $ZK"
 
 if [ "$Index"=="0" ]
 then
-  echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> "$ZOO_CONF_DIR"/zoo.cfg.dynamic
-  zkServer-initialize.sh --force --myid=$MYID
-  zkServer.sh start-foreground
+  echo "server.$MYID=$IPADDRESS:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
+  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
   
 else
-  echo "`zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> "$ZOO_CONF_DIR"/zoo.cfg.dynamic
-  echo "server.$MYID=$HOSTNAME:2888:3888:observer;2181" >> "$ZOO_CONF_DIR"/zoo.cfg.dynamic
-  cp "$ZOO_CONF_DIR"/zoo.cfg.dynamic "$ZOO_CONF_DIR"/zoo.cfg.dynamic.org
-  zkServer-initialize.sh --force --myid=$MYID
-  zkServer.sh start
-  zkCli.sh -server $ZK:2181 reconfig -add "server.$MYID=$HOSTNAME:2888:3888:participant;2181"
-  zkServer.sh stop
-  zkServer.sh start-foreground
+  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  echo "server.$MYID=$IPADDRESS:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
+  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
+  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start
+  /tmp/zookeeper/bin/zkCli.sh -server $ZK:2181 reconfig -add "server.$MYID=$IPADDRESS:2888:3888:participant;2181"
+  /tmp/zookeeper/bin/zkServer.sh stop
+  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
+  
+  
 fi
