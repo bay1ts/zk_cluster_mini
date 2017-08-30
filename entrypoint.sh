@@ -2,7 +2,7 @@
  
 HOSTNAME=`hostname`
 
-cd "$ZOO_CONF_DIR"
+cd /tmp/zookeeper
 OLD_IFS="$IFS" 
 IFS="-" 
 arr=($HOSTNAME) 
