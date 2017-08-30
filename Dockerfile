@@ -4,9 +4,9 @@ MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 # Install required packages
 RUN apk add --no-cache \
     bash \
-    git \
-    ant \
     su-exec
+RUN apk add git
+RUN apk add ant
 
 RUN mkdir /tmp/zookeeper
 WORKDIR /tmp/zookeeper
