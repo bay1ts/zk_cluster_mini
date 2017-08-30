@@ -1,4 +1,4 @@
-FROM goodrainapps/openjdk:8u131-jre-alpine
+FROM anapsix/alpine-java:jdk7
 MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 
 # Install required packages
