@@ -1,5 +1,5 @@
 FROM ubuntu:vivid
-
+RUN ls
 RUN apt-get update \
  && apt-get -y install git ant openjdk-8-jdk \
  && apt-get clean
