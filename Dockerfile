@@ -2,11 +2,12 @@ FROM goodrainapps/openjdk:8u131-jre-alpine
 MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 
 # Install required packages
+RUN apk update && apk upgrade && \
+apk add --no-cache git ant
+
 RUN apk add --no-cache \
     bash \
     su-exec
-RUN apk add git
-RUN apk add ant
 
 RUN mkdir /tmp/zookeeper
 WORKDIR /tmp/zookeeper
