@@ -12,7 +12,8 @@ Index=${arr[@]:1:1}
 
  
 ((MYID=$Index+1)) 
-ZK="$HOSTN"+0
+ZK=${HOSTN}"-0"
+echo "first zk is $ZK"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index"=="0" ]
