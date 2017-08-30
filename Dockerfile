@@ -3,7 +3,6 @@ FROM ubuntu:vivid
 RUN apt-get update \
  && apt-get -y install git ant openjdk-8-jdk \
  && apt-get clean
-
 RUN mkdir /tmp/zookeeper
 WORKDIR /tmp/zookeeper
 RUN git clone https://github.com/apache/zookeeper.git .
@@ -23,9 +22,9 @@ RUN set -x \
     && mkdir -p "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR" \
     && chown "$ZOO_USER:$ZOO_USER" "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR"
 
-    
-EXPOSE 2181 2888 3888
 
+EXPOSE 2181 2888 3888
+ENV PATH=$PATH:/tmp/zookeeper/bin
 
 RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
 RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
