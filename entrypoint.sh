@@ -25,7 +25,8 @@ then
   echo "--------------------"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$IPADDRESS:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
-  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
+  /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
+  echo "$MYID" >/tmp/zookeeper/myid
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
   
 else
@@ -33,6 +34,7 @@ else
   echo "server.$MYID=$IPADDRESS:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
+  echo "$MYID" >/tmp/zookeeper/myid
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start
   /tmp/zookeeper/bin/zkCli.sh -server $ZK:2181 reconfig -add "server.$MYID=$IPADDRESS:2888:3888:participant;2181"
   /tmp/zookeeper/bin/zkServer.sh stop
