@@ -12,9 +12,9 @@ arr=($HOSTNAME)
 IFS="$OLD_IFS"
 HOSTN=${arr[@]:0:1}
 Index=${arr[@]:1:1}
-echo "$index"
- 
-((MYID=$Index+1)) 
+echo "$Index"
+echo "$HOSTN"
+MYID=$Index+1
 ZK=${HOSTN}"-0"
 echo "first zk is ------"
 echo "$ZK"
