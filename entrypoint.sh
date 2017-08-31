@@ -5,6 +5,7 @@ HOSTNAME=`hostname`
 cd /tmp/zookeeper
 ls
 echo "-----"
+echo "$HOSTNAME"
 OLD_IFS="$IFS" 
 IFS="-" 
 arr=($HOSTNAME) 
