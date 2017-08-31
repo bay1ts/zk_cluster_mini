@@ -38,7 +38,6 @@ RUN git clone https://github.com/apache/zookeeper.git .
 RUN git checkout release-3.5.1-rc2
 RUN ant jar
 RUN echo "build zookeeper  success"
-RUN service iptables stop 
 EXPOSE 2181 2888 3888
 
 RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
