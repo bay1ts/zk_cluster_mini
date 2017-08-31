@@ -19,7 +19,7 @@ ZK=${HOSTN}"-0"
 echo "first zk is ------"
 echo "$ZK"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
-touch /tmp/zookeeper/conf/zoo.cfg.dynamic
+
 if [ "$Index"=="0" ]
 then
   echo "--------------------"
