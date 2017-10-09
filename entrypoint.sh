@@ -3,17 +3,14 @@
 HOSTNAME=`hostname`
 
 cd /tmp/zookeeper
-ls
-echo "-----"
-echo "$HOSTNAME"
 OLD_IFS="$IFS" 
 IFS="-" 
 arr=($HOSTNAME) 
 IFS="$OLD_IFS"
 HOSTN=${arr[@]:0:1}
 Index=${arr[@]:1:1}
-echo "$Index"
-echo "$HOSTN"
+echo "index is $Index"
+echo "hostname is $HOSTN"
 MYID=`expr $Index + 1`
 ZK=${HOSTN}"-0"
 echo "first zk is ------"
