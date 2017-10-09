@@ -17,7 +17,7 @@ echo "first zk is ------$ZK"
 echo "$MYID"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
-if [ "$Index"="0" ];then
+if [ "$Index" = "0" ];then
   echo "first node"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
