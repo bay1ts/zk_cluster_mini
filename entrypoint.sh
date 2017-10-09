@@ -23,7 +23,7 @@ echo "$MYID"
 
 if [ "$Index"=="0" ]
 then
-  echo "--------------------"
+  echo "first node"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
@@ -31,6 +31,8 @@ then
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
   
 else
+  echo "adding to existed"
+  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
   echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
