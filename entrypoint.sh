@@ -15,6 +15,8 @@ MYID=`expr $Index + 1`
 ZK=${HOSTN}"-0"
 echo "first zk is ------$ZK"
 echo "$MYID"
+rm -f /dat1/marker
+touch /dat1/marker
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index" = "0" ];then
