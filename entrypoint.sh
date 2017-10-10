@@ -24,7 +24,7 @@ if [ "$Index" = "0" ];then
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
   echo "$MYID" >/tmp/zookeeper/myid
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
-  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /dat1/marker
+  echo "`/tmp/zookeeper/bin/zkCli.sh get /zookeeper/config|grep ^server`" >> /dat1/marker
 else
   echo "adding to existed"
   cat /dat1/marker
