@@ -30,7 +30,7 @@ if [ "$Index" = "0" ];then
   echo "$MYID" >/tmp/zookeeper/myid
   echo "1-----------"
   #ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
-  /tmp/zookeeper/bin/zkServer.sh
+  /tmp/zookeeper/bin/zkServer.sh start
   echo "-=-=-=------------------"
   echo "`/tmp/zookeeper/bin/zkCli.sh get /zookeeper/config|grep ^server`" 
   echo "`/tmp/zookeeper/bin/zkCli.sh get /zookeeper/config|grep ^server`" >> /dat1/marker
