@@ -24,8 +24,11 @@ if [ "$Index" = "0" ];then
   echo "first node"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  echo "==="
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
+  echo "0"
   echo "$MYID" >/tmp/zookeeper/myid
+  echo "1"
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
   echo "-=-=-=------------------"
   echo "`/tmp/zookeeper/bin/zkCli.sh get /zookeeper/config|grep ^server`" 
