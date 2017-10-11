@@ -13,6 +13,7 @@ echo "index is $Index"
 echo "hostname is $HOSTN"
 MYID=`expr $Index + 1`
 ZK=${HOSTN}"-0"
+echo "verify is latest code"
 echo "first zk is ------$ZK"
 echo "$MYID"
 rm -f /dat1/marker
