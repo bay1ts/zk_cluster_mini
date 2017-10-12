@@ -36,12 +36,10 @@ if [ "$Index" = "0" ];then
   echo "`/tmp/zookeeper/bin/zkCli.sh get /zookeeper/config|grep ^server`" >> /dat1/marker
 else
   echo "adding to existed"
-  cat /dat1/marker
-  cat /dat1/marker >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+
   echo "------------====================" 
-  echo "------------====================" >/tmp/zookeeper/conf/test
-  #echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
-  #echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
+  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
