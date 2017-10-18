@@ -16,12 +16,15 @@ ZK=${HOSTN}"-0"
 echo "verify is latest code"
 echo "first zk is ------$ZK"
 echo "$MYID"
-rm -f /dat1/marker
-touch /dat1/marker
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index" = "0" ];then
-  echo "first node"
+
+  if [ -e "/tmp/cluster_exists_marker" ];then
+    echo "first node readd "
+  else
+    touch /tmp/cluster_exists_marker
+    echo "first node"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "==="
