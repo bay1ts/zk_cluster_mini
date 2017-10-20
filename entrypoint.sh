@@ -19,12 +19,8 @@ echo "$MYID"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index" = "0" ];then
-
-  if [ -e "/tmp/cluster_exists_marker" ];then
-    echo "first node readd "
-  else
-    touch /tmp/cluster_exists_marker
-    echo "first node"
+  touch /tmp/cluster_exists_marker
+  echo "first node"
   ls /tmp/zookeeper/bin
   echo "server.$MYID=$HOSTNAME:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "==="
@@ -35,7 +31,6 @@ if [ "$Index" = "0" ];then
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
   #/tmp/zookeeper/bin/zkServer.sh start
   echo "-=-=-=------------------"
-  fi
 else
   echo "adding to existed"
 
