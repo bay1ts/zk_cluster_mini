@@ -42,8 +42,8 @@ EXPOSE 2181 2888 3888
 VOLUME ["/dat1"]
 RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
 RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
-RUN echo "minSessionTimeout=400000" >> /tmp/zookeeper/conf/zoo.cfg
-RUN echo "maxSessionTimeout=1000000" >> /tmp/zookeeper/conf/zoo.cfg
+RUN echo "minSessionTimeout=4000000" >> /tmp/zookeeper/conf/zoo.cfg
+RUN echo "maxSessionTimeout=10000000" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
 COPY entrypoint.sh /tmp/
 RUN echo "coping entry"
