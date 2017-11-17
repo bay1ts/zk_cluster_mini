@@ -22,20 +22,18 @@ if [ "$Index" = "0" ];then
   touch /tmp/cluster_exists_marker
   echo "first node"
   ls /tmp/zookeeper/bin
+  echo "-------------------server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181"
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "==="
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
-  echo "0--------------"
   echo "$MYID" >/tmp/zookeeper/myid
-  echo "1-----------"
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
-  #/tmp/zookeeper/bin/zkServer.sh start
-  echo "-=-=-=------------------"
 else
   echo "adding to existed"
-
   echo "------------====================" 
   echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
+  echo "======================server.1=$ZK-0:2888:3888:participant;0.0.0.0:2181"
+  echo "=====================server.$MYID=$HOSTNAME.$HOSTN:2888:3888:observer;2181"
   echo "server.1=$ZK-0:2888:3888:participant;0.0.0.0:2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
