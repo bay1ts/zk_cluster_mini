@@ -36,7 +36,7 @@ else
 
   echo "------------====================" 
   echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
-  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
+  echo "server.1=grd4cb94-0:2888:3888:participant;0.0.0.0:2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid=$MYID
