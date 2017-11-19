@@ -46,6 +46,9 @@ RUN echo "minSessionTimeout=4000000" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "maxSessionTimeout=10000000" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
 COPY entrypoint.sh /tmp/
+COPY java_mem_common.sh /
+
 RUN echo "coping entry"
 RUN chmod 777 /tmp/entrypoint.sh
+RUN chmod 777 /java_mem_common.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
