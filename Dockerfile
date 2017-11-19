@@ -45,10 +45,12 @@ RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "minSessionTimeout=4000000" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "maxSessionTimeout=10000000" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
+ADD peer-finder /peer-finder
 COPY entrypoint.sh /tmp/
 COPY java_mem_common.sh /
-
+COPY on-start.sh /
 RUN echo "coping entry"
-RUN chmod 777 /tmp/entrypoint.sh
-RUN chmod 777 /java_mem_common.sh
+RUN chmod 755 /tmp/entrypoint.sh
+RUN chmod 755 /java_mem_common.sh
+RUN chmod 755 /on-start.sh
 ENTRYPOINT ["/tmp/entrypoint.sh"]
