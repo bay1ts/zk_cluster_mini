@@ -9,6 +9,7 @@ while read -r line
 do
     if [ -z $nodes ];then
       nodes="$line"
+      echo $nodes > /zk/zk-data/first_node
     else  
       nodes="$nodes,$line"
     fi  
