@@ -15,6 +15,9 @@ MYID=`expr $Index + 1`
 ZK=${HOSTN}"-0"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
+sed -i '177i if [-e "/java_mem_common.sh"];then' /tmp/zookeeper/bin/zkServer.sh
+sed -i '178i . "/java_mem_common.sh"' /tmp/zookeeper/bin/zkServer.sh
+sed -i "179i fi" /tmp/zookeeper/bin/zkServer.sh
 if [ "$Index" = "0" ];then
   touch /tmp/cluster_exists_marker
   echo "first node"
