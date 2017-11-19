@@ -24,6 +24,8 @@ if [ ! "$(hostname)" == "$(echo $SERVICE_NAME)-0" ] || \
     [ -e "/zk/zk-data/cluster_exists_marker" ]
 then
   echo "adding to existed"
+  one=sed -n '1p'/zk/zk-data/nodes
+  echo "-------------$one"
   echo "`bin/zkCli.sh -server $ZK.$HOSTN:2181 get /zookeeper/config|grep ^server`" 
   echo "server.1=$ZK.$HOSTN:2888:3888:participant;0.0.0.0:2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
