@@ -13,28 +13,20 @@ echo "index is $Index"
 echo "hostname is $HOSTN"
 MYID=`expr $Index + 1`
 ZK=${HOSTN}"-0"
-echo "verify is latest code"
-echo "first zk is ------$ZK"
-echo "$MYID"
 #IPADDRESS=`ip -4 addr show scope global dev eth0 | grep inet | awk '{print \$ZK}' | cut -d / -f 1`
 
 if [ "$Index" = "0" ];then
   touch /tmp/cluster_exists_marker
   echo "first node"
   ls /tmp/zookeeper/bin
-  echo "-------------------server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181"
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
-  echo "==="
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
   echo "$MYID" >/tmp/zookeeper/myid
   echo "$MYID" >/tmp/zookeeper/zookeeper_server.pid
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
 else
   echo "adding to existed"
-  echo "------------====================" 
-  echo "`bin/zkCli.sh -server $ZK:2181 get /zookeeper/config|grep ^server`" 
-  echo "======================server.1=$ZK.$HOSTN:2888:3888:participant;0.0.0.0:2181"
-  echo "=====================server.$MYID=$HOSTNAME.$HOSTN:2888:3888:observer;2181"
+  echo "`bin/zkCli.sh -server $ZK.$HOSTN:2181 get /zookeeper/config|grep ^server`" 
   echo "server.1=$ZK.$HOSTN:2888:3888:participant;0.0.0.0:2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888:observer;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   cp /tmp/zookeeper/conf/zoo.cfg.dynamic /tmp/zookeeper/conf/zoo.cfg.dynamic.org
