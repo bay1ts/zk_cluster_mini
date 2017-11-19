@@ -18,6 +18,8 @@ ZK=${HOSTN}"-0"
 sed -i '177i if [-e "/java_mem_common.sh"];then' /tmp/zookeeper/bin/zkServer.sh
 sed -i '178i . "/java_mem_common.sh"' /tmp/zookeeper/bin/zkServer.sh
 sed -i "179i fi" /tmp/zookeeper/bin/zkServer.sh
+
+/peer-finder -on-start=/on-start.sh -service=$(echo $SERVICE_NAME)
 if [ "$Index" = "0" ];then
   touch /tmp/cluster_exists_marker
   echo "first node"
