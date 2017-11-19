@@ -53,4 +53,5 @@ RUN echo "coping entry"
 RUN chmod 755 /tmp/entrypoint.sh
 RUN chmod 755 /java_mem_common.sh
 RUN chmod 755 /on-start.sh
+RUN chmod 755 /peer-finder
 ENTRYPOINT ["/tmp/entrypoint.sh"]
