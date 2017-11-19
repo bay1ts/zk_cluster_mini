@@ -20,6 +20,7 @@ sed -i '178i . "/java_mem_common.sh"' /tmp/zookeeper/bin/zkServer.sh
 sed -i "179i fi" /tmp/zookeeper/bin/zkServer.sh
 
 /peer-finder -on-start=/on-start.sh -service=$(echo $SERVICE_NAME)
+echo "begin check is cluster"
 if [ ! "$(hostname)" == "$(echo $SERVICE_NAME)-0" ] || \
     [ -e "/zk/zk-data/cluster_exists_marker" ]
 then
@@ -39,7 +40,7 @@ then
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
 else
   echo "first node"
-  ls /tmp/zookeeper/bin
+  echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181"
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181" >> /tmp/zookeeper/conf/zoo.cfg.dynamic
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
   echo "$MYID" >/tmp/zookeeper/myid
