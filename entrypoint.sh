@@ -44,6 +44,6 @@ else
   /tmp/zookeeper/bin/zkServer-initialize.sh --force --myid="$MYID"
   echo "$MYID" >/tmp/zookeeper/myid
   echo "$MYID" >/tmp/zookeeper/zookeeper_server.pid
-  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
+  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' exec /tmp/zookeeper/bin/zkServer.sh start-foreground
   
 fi
