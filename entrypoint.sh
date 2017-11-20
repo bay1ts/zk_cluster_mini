@@ -36,7 +36,7 @@ then
   ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start
   /tmp/zookeeper/bin/zkCli.sh -server $ZK.$HOSTN:2181 reconfig -add "server.$MYID=$HOSTNAME.$HOSTN:2888:3888:participant;2181"
   /tmp/zookeeper/bin/zkServer.sh stop
-  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' /tmp/zookeeper/bin/zkServer.sh start-foreground
+  ZOO_LOG_DIR=/var/log ZOO_LOG4J_PROP='INFO,CONSOLE,ROLLINGFILE' exec /tmp/zookeeper/bin/zkServer.sh start-foreground
 else
   echo "first node"
   echo "server.$MYID=$HOSTNAME.$HOSTN:2888:3888;2181"
