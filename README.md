@@ -1,2 +1,3 @@
 # DynamicZookeeperCluser
 可 动态 水平扩展的 zk集群。集群内部container hostname需要满足条件:hostnameA-0,hostnameB-1...
+for good rain cloud
