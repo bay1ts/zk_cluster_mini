@@ -32,21 +32,21 @@ RUN apk add --no-cache \
     bash \
     su-exec
 
-RUN mkdir /tmp/zookeeper
-WORKDIR /tmp/zookeeper
+RUN mkdir /tmp/zkapp
+WORKDIR /tmp/zkapp
 RUN git clone https://github.com/apache/zookeeper.git .
 RUN git checkout release-3.5.1-rc2
 RUN ant jar
 RUN echo "build zookeeper  success"
 EXPOSE 2181 2888 3888
 VOLUME ["/dat1"]
-RUN mkdir /tmp/zkdata
-RUN sed -i "s#/tmp/zookeeper#/tmp/zkdata#g"  /tmp/zookeeper/conf/zoo_sample.cfg
-RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
-RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
-RUN echo "minSessionTimeout=4000000" >> /tmp/zookeeper/conf/zoo.cfg
-RUN echo "maxSessionTimeout=10000000" >> /tmp/zookeeper/conf/zoo.cfg
-RUN echo "dynamicConfigFile=/tmp/zookeeper/conf/zoo.cfg.dynamic" >> /tmp/zookeeper/conf/zoo.cfg
+#RUN mkdir /tmp/zkdata
+#RUN sed -i "s#/tmp/zookeeper#/tmp/zkdata#g"  /tmp/zookeeper/conf/zoo_sample.cfg
+RUN cp /tmp/zkapp/conf/zoo_sample.cfg /tmp/zkapp/conf/zoo.cfg
+RUN echo "standaloneEnabled=false" >> /tmp/zkapp/conf/zoo.cfg
+RUN echo "minSessionTimeout=4000000" >> /tmp/zkapp/conf/zoo.cfg
+RUN echo "maxSessionTimeout=10000000" >> /tmp/zkapp/conf/zoo.cfg
+RUN echo "dynamicConfigFile=/tmp/zkapp/conf/zoo.cfg.dynamic" >> /tmp/zkapp/conf/zoo.cfg
 ADD peer-finder /peer-finder
 COPY entrypoint.sh /tmp/
 COPY java_mem_common.sh /
