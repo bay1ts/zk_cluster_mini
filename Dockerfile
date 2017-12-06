@@ -40,6 +40,8 @@ RUN ant jar
 RUN echo "build zookeeper  success"
 EXPOSE 2181 2888 3888
 VOLUME ["/dat1"]
+RUN mkdir /tmp/zkdata
+RUN sed -i "s#/tmp/zookeeper#/tmp/zkdata#g"  /tmp/zookeeper/conf/zoo_sample.cfg
 RUN cp /tmp/zookeeper/conf/zoo_sample.cfg /tmp/zookeeper/conf/zoo.cfg
 RUN echo "standaloneEnabled=false" >> /tmp/zookeeper/conf/zoo.cfg
 RUN echo "minSessionTimeout=4000000" >> /tmp/zookeeper/conf/zoo.cfg
